@@ -1,0 +1,82 @@
+@import 'variables.scss';
+
+/* ==========================================================================
+   Fonts
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Lato-Bold';
+  src: url('../assets/font/Lato-Bold.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Lato-BoldItalic';
+  src: url('../assets/font/Lato-BoldItalic.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Lato-Italic';
+  src: url('../assets/font/Lato-Italic.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Lato-Regular';
+  src: url('../assets/font/Lato-Regular.ttf') format('ttf');
+}
+
+/* ==========================================================================
+   Main Styles
+   ========================================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: inherit;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+}
+
+html {
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1rem;
+  font-weight: normal;
+  font-family: 'Lato-Regular', sans-serif;
+  text-rendering: optimizeLegibility;
+  padding-top: var(--header-height);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+strong,
+label {
+  font-weight: 600;
+}

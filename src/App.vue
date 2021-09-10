@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1 class="text">App</h1>
   </div>
 </template>
 
@@ -11,6 +12,8 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+.text {
+  color: $primary-color;
+}
 </style>
