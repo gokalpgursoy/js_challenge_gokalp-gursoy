@@ -7,6 +7,7 @@
         <Products />
       </Container>
     </main>
+    <Footer />
   </div>
 </template>
 
@@ -16,9 +17,15 @@ import Vue from 'vue';
 import Products from '@/views/Products.vue';
 import Header from '@/components/Header.vue';
 import Container from '@/components/Container.vue';
+import Footer from '@/components/Footer.vue';
 
 export default Vue.extend({
-  components: { Products, Header, Container },
+  components: {
+    Products,
+    Header,
+    Container,
+    Footer,
+  },
   name: 'App',
 });
 </script>
