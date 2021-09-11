@@ -1,6 +1,7 @@
 import { RetailPriceModel } from './RetailPriceModel';
 
 export interface ProductModel {
+  uuid: string;
   title: string;
   description: string;
   original_retail_price: RetailPriceModel;

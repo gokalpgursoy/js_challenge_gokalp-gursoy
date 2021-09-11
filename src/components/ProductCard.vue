@@ -2,7 +2,11 @@
   <article class="product">
     <figure class="product__image-wrapper">
       <img class="product__image" src="../assets/images/activity_image.jpeg" alt="PRODUCT_TITLE" />
-      <button class="product__wishlist-button button button--round button--wishlist">
+      <button
+        class="product__wishlist-button button button--round"
+        :class="isProductExistInWishlist && 'product__wishlist-button--exist'"
+        @click="handleAddToWishlist"
+      >
         <BaseIcon icon-name="wishlist" />
       </button>
     </figure>
@@ -20,15 +24,28 @@
           {{ product.retail_price.formatted_iso_value }}
         </span>
       </div>
-      <button class="product__details--add-to-cart button button--primary">ADD TO CART</button>
+      <button
+        class="button button--primary"
+        :class="
+          isProductExistInCart
+            ? 'product__details--in-cart-button'
+            : 'product__details--add-to-cart-button'
+        "
+        @click="handleAddToCart"
+      >
+        {{ isProductExistInCart ? 'IN CART' : 'ADD TO CART' }}
+      </button>
     </div>
   </article>
 </template>
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
+import { mapState } from 'vuex';
 
 import { ProductModel } from '@/models/ProductModel';
+
+import { mutations } from '@/store/methods';
 
 export default Vue.extend({
   name: 'ProductCard',
@@ -36,6 +53,23 @@ export default Vue.extend({
     product: {
       type: Object as PropType<ProductModel>,
       required: true,
+    },
+  },
+  computed: {
+    ...mapState(['cart', 'wishlist']),
+    isProductExistInCart() {
+      return this.cart.some((item: ProductModel) => item.uuid === this.product.uuid);
+    },
+    isProductExistInWishlist() {
+      return this.wishlist.some((item: ProductModel) => item.uuid === this.product.uuid);
+    },
+  },
+  methods: {
+    handleAddToCart() {
+      this.$store.commit(mutations.ADD_TO_CART, this.product);
+    },
+    handleAddToWishlist() {
+      this.$store.commit(mutations.ADD_TO_WISHLIST, this.product);
     },
   },
 });
@@ -65,6 +99,10 @@ export default Vue.extend({
     position: absolute;
     top: 10px;
     right: 10px;
+    background-color: $white;
+    &--exist {
+      background-color: $white-light;
+    }
   }
   &__details {
     display: flex;
@@ -98,18 +136,22 @@ export default Vue.extend({
         color: $danger;
       }
     }
-    &--add-to-cart {
+    &--add-to-cart-button {
+      background-color: $white;
       width: 100%;
-      margin-top: auto;
+    }
+    &--in-cart-button {
+      pointer-events: none;
+      background-color: $white-light;
     }
   }
 }
 .button {
   border: 1px solid $white-light;
   border-radius: 100px;
-  background-color: $white;
   cursor: pointer;
   transition: 0.3s border, 0.3s color, 0.3s background-color;
+  margin-top: auto;
   &--round {
     display: block;
     border-radius: 50%;
