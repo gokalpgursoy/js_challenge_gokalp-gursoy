@@ -7,22 +7,37 @@
       </button>
     </figure>
     <div class="product__details">
-      <h2 class="product__details--title">PRODUCT_TITLE</h2>
-      <p class="product__details--subtitle">PRODUCT_DESCRIPTION</p>
+      <h2 class="product__details--title">{{ product.title }}</h2>
+      <p class="product__details--subtitle">{{ product.description }}</p>
       <div class="product__details--price">
-        <span class="product__details--price--strike">£210</span>
-        <span class="product__details--price--discounted">£100</span>
+        <span v-if="product.discount" class="product__details--price--strike">
+          {{ product.original_retail_price.formatted_iso_value }}
+        </span>
+        <span v-else class="product__details--price">
+          {{ product.original_retail_price.formatted_iso_value }}
+        </span>
+        <span v-if="product.discount" class="product__details--price--discounted">
+          {{ product.retail_price.formatted_iso_value }}
+        </span>
       </div>
-      <button class="product__details--add-to-cart button button--primary">ADD_TO_CART</button>
+      <button class="product__details--add-to-cart button button--primary">ADD TO CART</button>
     </div>
   </article>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropType } from 'vue';
+
+import { ProductModel } from '@/models/ProductModel';
 
 export default Vue.extend({
   name: 'ProductCard',
+  props: {
+    product: {
+      type: Object as PropType<ProductModel>,
+      required: true,
+    },
+  },
 });
 </script>
 

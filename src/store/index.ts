@@ -23,7 +23,6 @@ export default new Vuex.Store({
   actions: {
     [actions.GET_PRODUCTS]: async ({ commit }, { limit, offset }) => {
       const response = await api.getProducts(limit, offset);
-      console.log('response', response);
       commit(mutations.SET_PRODUCTS, response.data);
     },
   },

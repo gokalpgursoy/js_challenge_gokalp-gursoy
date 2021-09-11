@@ -1,8 +1,8 @@
 <template>
   <div>
     <ul class="product-list">
-      <li class="product-list__item">
-        <ProductCard />
+      <li class="product-list__item" v-for="(item, i) in products" :key="i">
+        <ProductCard :product="item" />
       </li>
     </ul>
     <Pagination />
@@ -11,6 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapState } from 'vuex';
 
 import ProductCard from '@/components/ProductCard.vue';
 import Pagination from '@/components/Pagination.vue';
@@ -20,6 +21,9 @@ import { actions } from '@/store/methods';
 export default Vue.extend({
   components: { ProductCard, Pagination },
   name: 'Products',
+  computed: {
+    ...mapState(['products']),
+  },
   beforeMount() {
     this.getProducts();
   },
