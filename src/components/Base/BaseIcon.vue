@@ -30,8 +30,8 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .base-icon {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: flex-end;
   &__text {
     margin-right: 5px;
     font-size: 12px;
