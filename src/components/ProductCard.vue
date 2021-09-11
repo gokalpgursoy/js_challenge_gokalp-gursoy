@@ -5,7 +5,7 @@
       <button
         class="product__wishlist-button button button--round"
         :class="isProductExistInWishlist && 'product__wishlist-button--exist'"
-        @click="handleAddToWishlist"
+        @click="handleToggleWishlist"
       >
         <BaseIcon icon-name="wishlist" />
       </button>
@@ -31,9 +31,9 @@
             ? 'product__details--in-cart-button'
             : 'product__details--add-to-cart-button'
         "
-        @click="handleAddToCart"
+        @click="handleToggleCart"
       >
-        {{ isProductExistInCart ? 'IN CART' : 'ADD TO CART' }}
+        {{ isProductExistInCart ? 'REMOVE FROM CART' : 'ADD TO CART' }}
       </button>
     </div>
   </article>
@@ -65,11 +65,19 @@ export default Vue.extend({
     },
   },
   methods: {
-    handleAddToCart() {
-      this.$store.commit(mutations.ADD_TO_CART, this.product);
+    handleToggleCart() {
+      if (this.isProductExistInCart) {
+        this.$store.commit(mutations.REMOVE_FROM_CART, this.product.uuid);
+      } else {
+        this.$store.commit(mutations.ADD_TO_CART, this.product);
+      }
     },
-    handleAddToWishlist() {
-      this.$store.commit(mutations.ADD_TO_WISHLIST, this.product);
+    handleToggleWishlist() {
+      if (this.isProductExistInWishlist) {
+        this.$store.commit(mutations.REMOVE_FROM_WISHLIST, this.product.uuid);
+      } else {
+        this.$store.commit(mutations.ADD_TO_WISHLIST, this.product);
+      }
     },
   },
 });
@@ -141,8 +149,8 @@ export default Vue.extend({
       width: 100%;
     }
     &--in-cart-button {
-      pointer-events: none;
-      background-color: $white-light;
+      background-color: $danger;
+      color: $white;
     }
   }
 }

@@ -29,6 +29,18 @@ export default new Vuex.Store({
     [mutations.ADD_TO_WISHLIST]: (state, data: ProductModel) => {
       state.wishlist.push(data);
     },
+    [mutations.REMOVE_FROM_CART]: (state, productId: string) => {
+      const index = state.cart.findIndex((item: ProductModel) => item.uuid === productId);
+      if (index > -1) {
+        state.cart.splice(index, 1);
+      }
+    },
+    [mutations.REMOVE_FROM_WISHLIST]: (state, productId: string) => {
+      const index = state.wishlist.findIndex((item: ProductModel) => item.uuid === productId);
+      if (index > -1) {
+        state.wishlist.splice(index, 1);
+      }
+    },
   },
   actions: {
     [actions.GET_PRODUCTS]: async ({ commit }, { limit, offset }) => {
