@@ -45,6 +45,14 @@ export default Vue.extend({
     padding: 10px;
     flex: 1 0 33.3333%;
     max-width: 33.3333%;
+    @media (max-width: 1024px) {
+      flex: 1 0 50%;
+      max-width: 50%;
+    }
+    @media (max-width: 769px) {
+      flex: 1 0 100%;
+      max-width: 100%;
+    }
   }
 }
 </style>
