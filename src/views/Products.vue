@@ -15,9 +15,19 @@ import Vue from 'vue';
 import ProductCard from '@/components/ProductCard.vue';
 import Pagination from '@/components/Pagination.vue';
 
+import { actions } from '@/store/methods';
+
 export default Vue.extend({
   components: { ProductCard, Pagination },
   name: 'Products',
+  beforeMount() {
+    this.getProducts();
+  },
+  methods: {
+    getProducts() {
+      this.$store.dispatch(actions.GET_PRODUCTS, { limit: 6, offset: 0 });
+    },
+  },
 });
 </script>
 
