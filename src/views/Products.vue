@@ -1,28 +1,27 @@
 <template>
-  <ul class="product-list">
-    <li class="product-list__item">
-      <ProductCard />
-    </li>
-  </ul>
+  <div>
+    <ul class="product-list">
+      <li class="product-list__item">
+        <ProductCard />
+      </li>
+    </ul>
+    <Pagination />
+  </div>
 </template>
+
 <script lang="ts">
 import Vue from 'vue';
+
 import ProductCard from '@/components/ProductCard.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default Vue.extend({
-  components: { ProductCard },
+  components: { ProductCard, Pagination },
   name: 'Products',
 });
 </script>
 
 <style lang="scss" scoped>
-ul {
-  li {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  }
-}
 .product-list {
   display: flex;
   flex: 0 1 auto;
