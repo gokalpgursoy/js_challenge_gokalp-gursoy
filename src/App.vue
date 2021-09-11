@@ -1,19 +1,29 @@
 <template>
   <div id="app">
-    <h1 class="text">App</h1>
+    <Header />
+    <main class="main">
+      <Container>
+        <Products />
+      </Container>
+    </main>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
+import Products from '@/views/Products.vue';
+import Header from '@/components/Header.vue';
+import Container from '@/components/Container.vue';
+
 export default Vue.extend({
+  components: { Products, Header, Container },
   name: 'App',
 });
 </script>
 
 <style lang="scss" scoped>
-.text {
-  color: $primary-color;
+.main {
+  padding-top: 40px;
 }
 </style>

@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import '_variables.scss';
 
 /* ==========================================================================
    Fonts
@@ -52,6 +52,8 @@ body {
   font-family: 'Lato-Regular', sans-serif;
   text-rendering: optimizeLegibility;
   padding-top: var(--header-height);
+  background-color: $secondary-color;
+  color: $primary-color;
 }
 
 a {
@@ -78,5 +80,6 @@ h6,
 b,
 strong,
 label {
-  font-weight: 600;
+  margin: 0;
+  font-weight: normal;
 }
