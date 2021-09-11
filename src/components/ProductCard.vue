@@ -84,7 +84,7 @@ export default Vue.extend({
       font-size: 12px;
       line-height: 19px;
       letter-spacing: 0.43px;
-      color: #808080;
+      color: $gray;
     }
     &--price {
       padding-bottom: 20px;
@@ -95,7 +95,7 @@ export default Vue.extend({
         text-decoration: line-through;
       }
       &--discounted {
-        color: #f54b5e;
+        color: $danger;
       }
     }
     &--add-to-cart {
@@ -105,9 +105,9 @@ export default Vue.extend({
   }
 }
 .button {
-  border: 1px solid #d9d9d9;
+  border: 1px solid $white-light;
   border-radius: 100px;
-  background-color: #ffffff;
+  background-color: $white;
   cursor: pointer;
   transition: 0.3s border, 0.3s color, 0.3s background-color;
   &--round {

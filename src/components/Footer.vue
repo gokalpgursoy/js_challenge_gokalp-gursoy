@@ -18,14 +18,14 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .footer {
-  background-color: #ffffff;
+  background-color: $white;
   &__container {
     height: 60px;
     display: flex;
     flex-direction: row;
     align-items: center;
     text-transform: uppercase;
-    background-color: #ffffff;
+    background-color: $white;
     &--sidenote {
       font-family: 'Lato-Bold', sans-serif;
       letter-spacing: 1.37px;
