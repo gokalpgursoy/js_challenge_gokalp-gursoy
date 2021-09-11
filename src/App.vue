@@ -3,6 +3,7 @@
     <Header />
     <main class="main">
       <Container>
+        <!--You can use <router-view /> here if you use vue-router and have multiple view-->
         <Products />
       </Container>
     </main>
@@ -24,6 +25,9 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .main {
-  padding-top: 40px;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0 auto;
+  margin: 30px 0 20px;
 }
 </style>

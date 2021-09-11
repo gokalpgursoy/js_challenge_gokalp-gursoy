@@ -14,7 +14,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .container {
-  background: $white;
   width: 100%;
   max-width: 1240px;
   padding: 0px 40px;

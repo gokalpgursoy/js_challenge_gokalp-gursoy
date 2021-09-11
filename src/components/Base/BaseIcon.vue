@@ -1,6 +1,6 @@
 <template>
   <div class="base-icon">
-    <span class="base-icon__text" v-text="text"></span>
+    <span v-if="text" class="base-icon__text" v-text="text"></span>
     <component :is="iconComponent" class="base-icon__icon" v-bind="$attrs" @v-on="$listeners" />
   </div>
 </template>
@@ -30,7 +30,8 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .base-icon {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   &__text {
     margin-right: 5px;
     font-size: 12px;
