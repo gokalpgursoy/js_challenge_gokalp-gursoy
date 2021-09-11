@@ -5,6 +5,10 @@ import store from '@/store';
 
 import '@/styles/main.scss';
 
+import BaseIcon from '@/components/Base/BaseIcon.vue';
+
+Vue.component('BaseIcon', BaseIcon);
+
 Vue.config.productionTip = false;
 
 new Vue({

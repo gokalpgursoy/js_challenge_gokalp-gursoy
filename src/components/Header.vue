@@ -2,7 +2,10 @@
   <header class="header">
     <Container class="header-container">
       <h1 class="header-container__title">BRAND</h1>
-      <aside class="header-container__bag"></aside>
+      <aside class="header-container__bag">
+        <BaseIcon icon-name="bag" text="$210" />
+        <BaseIcon icon-name="wishlist" />
+      </aside>
     </Container>
   </header>
 </template>
@@ -36,6 +39,7 @@ export default Vue.extend({
       display: flex;
       flex-direction: row;
       align-items: flex-end;
+      gap: 10px;
     }
   }
 }
