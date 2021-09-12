@@ -1,11 +1,6 @@
 <template>
-  <div class="popover" :class="isShowCartPopover ? 'popover__cart' : 'popover__wishlist'">
-    <div
-      class="popover__card__wrapper"
-      :class="
-        isShowCartPopover ? 'popover__card__wrapper__cart' : 'popover__card__wrapper__wishlist'
-      "
-    >
+  <div class="popover">
+    <div class="popover__card__wrapper">
       <div v-for="(item, i) in list" class="popover__card" :key="i">
         <img
           class="popover__card--image"
@@ -92,20 +87,9 @@ export default Vue.extend({
   top: 25px;
   left: -250px;
   z-index: 1;
-  &__cart {
-    height: 350px;
-  }
-  &__wishlist {
-    height: 300px;
-  }
   &__card__wrapper {
     overflow: auto;
-    &__cart {
-      height: 300px;
-    }
-    &__wishlist {
-      height: 350px;
-    }
+    height: 300px;
   }
   &__card {
     height: 100px;
