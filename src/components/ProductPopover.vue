@@ -6,8 +6,8 @@
           class="popover__card--image"
           src="../assets/images/activity_image.jpeg"
           :alt="item.title"
-          width="110"
-          height="110"
+          width="80"
+          height="80"
         />
         <div class="popover__card--content">
           <p class="popover__card--content__title">{{ item.title }}</p>
@@ -87,17 +87,17 @@ export default Vue.extend({
   top: 25px;
   left: -250px;
   z-index: 1;
+  font-size: 11px;
   &__card__wrapper {
     overflow: auto;
     height: 300px;
   }
   &__card {
-    height: 150px;
+    height: 100px;
     width: 100%;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 8px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 10px;
     border-bottom: 2px solid $primary;
