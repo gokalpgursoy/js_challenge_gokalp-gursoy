@@ -3,7 +3,7 @@
     <BaseIcon
       icon-name="wishlist"
       :counter="wishlist.length"
-      clickable
+      :clickable="wishlist.length > 0"
       @handleClick="handleClickIcon"
     />
     <ProductPopover v-if="isShowWishlistPopover" />
@@ -27,7 +27,10 @@ export default Vue.extend({
   methods: {
     handleClickIcon() {
       this.$store.commit(mutations.SET_IS_SHOW_CART_POPOVER, false);
-      this.$store.commit(mutations.SET_IS_SHOW_WISHLIST_POPOVER, !this.isShowWishlistPopover);
+      this.$store.commit(
+        mutations.SET_IS_SHOW_WISHLIST_POPOVER,
+        !this.isShowWishlistPopover,
+      );
     },
   },
 });

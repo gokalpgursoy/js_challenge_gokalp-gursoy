@@ -5,7 +5,7 @@
         v-if="!isLoading"
         class="product__image"
         src="../assets/images/activity_image.jpeg"
-        alt="PRODUCT_TITLE"
+        :alt="product.title"
         width="300"
         height="300"
       />

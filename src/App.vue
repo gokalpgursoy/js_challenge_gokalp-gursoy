@@ -38,7 +38,7 @@ export default Vue.extend({
       const element = event.srcElement as HTMLElement;
       const { classList } = element;
       const clickedElementId = element.parentElement?.parentElement?.id;
-      const isElementPopover = classList.contains('popover');
+      const isElementPopover = classList.toString().includes('popover');
       if (!isElementPopover) {
         if (this.isShowCartPopover && clickedElementId !== 'bag-icon') {
           this.$store.commit(mutations.SET_IS_SHOW_CART_POPOVER, false);

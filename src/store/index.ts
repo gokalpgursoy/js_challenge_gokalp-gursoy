@@ -24,6 +24,26 @@ export default new Vuex.Store({
     isShowCartPopover: false,
     isShowWishlistPopover: false,
   },
+  getters: {
+    sumCartPrice: (state): string => {
+      const sum: number = state.cart
+        .map((item: ProductModel) => {
+          if (item.discount) {
+            return item.retail_price.value;
+          }
+          return item.original_retail_price.value;
+        })
+        .reduce((acc: number, itemPrice: number) => acc + itemPrice, 0);
+
+      let currencyPrefix = '';
+      if (state.cart.length) {
+        [currencyPrefix] = state.cart[0].retail_price.formatted_value.split(
+          ' ',
+        );
+      }
+      return `${currencyPrefix}${sum}`;
+    },
+  },
   mutations: {
     [mutations.SET_PRODUCTS]: (state, data: ProductModel[]) => {
       state.products = data;
@@ -38,13 +58,17 @@ export default new Vuex.Store({
       state.wishlist.push(data);
     },
     [mutations.REMOVE_FROM_CART]: (state, productId: string) => {
-      const index = state.cart.findIndex((item: ProductModel) => item.uuid === productId);
+      const index = state.cart.findIndex(
+        (item: ProductModel) => item.uuid === productId,
+      );
       if (index > -1) {
         state.cart.splice(index, 1);
       }
     },
     [mutations.REMOVE_FROM_WISHLIST]: (state, productId: string) => {
-      const index = state.wishlist.findIndex((item: ProductModel) => item.uuid === productId);
+      const index = state.wishlist.findIndex(
+        (item: ProductModel) => item.uuid === productId,
+      );
       if (index > -1) {
         state.wishlist.splice(index, 1);
       }
@@ -71,7 +95,10 @@ export default new Vuex.Store({
       commit(mutations.SET_TOTAL_PRODUCT_COUNT, response.meta.count);
       commit(mutations.SET_IS_LOADING, false);
     },
-    [actions.UPDATE_PAGE_AND_GET_PRODUCTS]: async ({ dispatch, commit }, pageNumber) => {
+    [actions.UPDATE_PAGE_AND_GET_PRODUCTS]: async (
+      { dispatch, commit },
+      pageNumber,
+    ) => {
       commit(mutations.SET_CURRENT_PAGE, pageNumber);
       dispatch(actions.GET_PRODUCTS);
     },
