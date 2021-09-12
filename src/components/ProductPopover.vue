@@ -4,7 +4,7 @@
       <div v-for="(item, i) in list" class="popover__card" :key="i">
         <img
           class="popover__card--image"
-          src="../assets/images/activity_image.jpeg"
+          :src="item.cover_image_url"
           :alt="item.title"
           width="80"
           height="80"
@@ -44,7 +44,12 @@ import { mutations } from '@/store/methods';
 export default Vue.extend({
   name: 'ProductPopover',
   computed: {
-    ...mapState(['cart', 'wishlist', 'isShowCartPopover', 'isShowWishlistPopover']),
+    ...mapState([
+      'cart',
+      'wishlist',
+      'isShowCartPopover',
+      'isShowWishlistPopover',
+    ]),
     ...mapGetters(['sumCartPrice']),
     list() {
       if (this.isShowCartPopover) {

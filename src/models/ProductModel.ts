@@ -7,4 +7,5 @@ export interface ProductModel {
   original_retail_price: RetailPriceModel;
   retail_price: RetailPriceModel;
   discount: number;
+  cover_image_url: string;
 }

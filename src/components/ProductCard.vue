@@ -4,7 +4,7 @@
       <img
         v-if="!isLoading"
         class="product__image"
-        src="../assets/images/activity_image.jpeg"
+        :src="product.cover_image_url"
         :alt="product.title"
         width="300"
         height="300"
