@@ -29,7 +29,7 @@ export default Vue.extend({
   },
   methods: {
     getProducts() {
-      this.$store.dispatch(actions.GET_PRODUCTS, { limit: 6, offset: 0 });
+      this.$store.dispatch(actions.GET_PRODUCTS);
     },
   },
 });

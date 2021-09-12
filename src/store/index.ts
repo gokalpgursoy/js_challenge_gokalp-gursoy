@@ -17,11 +17,16 @@ export default new Vuex.Store({
     products,
     cart,
     wishlist,
-    count: 0,
+    totalProductCount: 0,
+    currentPage: 1,
+    limit: 6,
   },
   mutations: {
     [mutations.SET_PRODUCTS]: (state, data: ProductModel[]) => {
       state.products = data;
+    },
+    [mutations.SET_TOTAL_PRODUCT_COUNT]: (state, count: number) => {
+      state.totalProductCount = count;
     },
     [mutations.ADD_TO_CART]: (state, data: ProductModel) => {
       state.cart.push(data);
@@ -41,11 +46,20 @@ export default new Vuex.Store({
         state.wishlist.splice(index, 1);
       }
     },
+    [mutations.SET_CURRENT_PAGE]: (state, page) => {
+      state.currentPage = page;
+    },
   },
   actions: {
-    [actions.GET_PRODUCTS]: async ({ commit }, { limit, offset }) => {
-      const response = await api.getProducts(limit, offset);
+    [actions.GET_PRODUCTS]: async ({ state, commit }) => {
+      const offset = state.currentPage - 1;
+      const response = await api.getProducts(state.limit, offset);
       commit(mutations.SET_PRODUCTS, response.data);
+      commit(mutations.SET_TOTAL_PRODUCT_COUNT, response.meta.count);
+    },
+    [actions.UPDATE_PAGE_AND_GET_PRODUCTS]: async ({ dispatch, commit }, pageNumber) => {
+      commit(mutations.SET_CURRENT_PAGE, pageNumber);
+      dispatch(actions.GET_PRODUCTS);
     },
   },
 });
