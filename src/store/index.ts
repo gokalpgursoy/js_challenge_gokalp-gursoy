@@ -57,7 +57,7 @@ export default new Vuex.Store({
   actions: {
     [actions.GET_PRODUCTS]: async ({ state, commit }) => {
       commit(mutations.SET_IS_LOADING, true);
-      const offset = state.currentPage - 1;
+      const offset = (state.currentPage - 1) * state.limit;
       const response = await api.getProducts(state.limit, offset);
       commit(mutations.SET_PRODUCTS, response.data);
       commit(mutations.SET_TOTAL_PRODUCT_COUNT, response.meta.count);
