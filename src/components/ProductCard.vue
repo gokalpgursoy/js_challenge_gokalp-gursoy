@@ -179,6 +179,7 @@ export default Vue.extend({
   &--round {
     display: block;
     border-radius: 50%;
+    border: 1px solid $primary;
   }
   &--primary {
     padding: 13px;
