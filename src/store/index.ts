@@ -21,6 +21,8 @@ export default new Vuex.Store({
     currentPage: 1,
     limit: 6,
     isLoading: false,
+    isShowCartPopover: false,
+    isShowWishlistPopover: false,
   },
   mutations: {
     [mutations.SET_PRODUCTS]: (state, data: ProductModel[]) => {
@@ -52,6 +54,12 @@ export default new Vuex.Store({
     },
     [mutations.SET_IS_LOADING]: (state, isLoading: boolean) => {
       state.isLoading = isLoading;
+    },
+    [mutations.SET_IS_SHOW_CART_POPOVER]: (state, isShow: boolean) => {
+      state.isShowCartPopover = isShow;
+    },
+    [mutations.SET_IS_SHOW_WISHLIST_POPOVER]: (state, isShow: boolean) => {
+      state.isShowWishlistPopover = isShow;
     },
   },
   actions: {

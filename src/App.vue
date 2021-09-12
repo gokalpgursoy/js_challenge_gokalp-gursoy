@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @click="handleClickBody">
     <Header />
     <main class="main">
       <Container>
@@ -13,11 +13,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapState } from 'vuex';
 
 import Products from '@/views/Products.vue';
 import Header from '@/components/Header.vue';
 import Container from '@/components/Container.vue';
 import Footer from '@/components/Footer.vue';
+import { mutations } from './store/methods';
 
 export default Vue.extend({
   name: 'App',
@@ -26,6 +28,26 @@ export default Vue.extend({
     Header,
     Container,
     Footer,
+  },
+  computed: {
+    ...mapState(['isShowCartPopover', 'isShowWishlistPopover']),
+  },
+  methods: {
+    handleClickBody(event: MouseEvent) {
+      event.stopPropagation();
+      const element = event.srcElement as HTMLElement;
+      const { classList } = element;
+      const clickedElementId = element.parentElement?.parentElement?.id;
+      const isElementPopover = classList.contains('popover');
+      if (!isElementPopover) {
+        if (this.isShowCartPopover && clickedElementId !== 'bag-icon') {
+          this.$store.commit(mutations.SET_IS_SHOW_CART_POPOVER, false);
+        }
+        if (this.isShowWishlistPopover && clickedElementId !== 'wishlist-icon') {
+          this.$store.commit(mutations.SET_IS_SHOW_WISHLIST_POPOVER, false);
+        }
+      }
+    },
   },
 });
 </script>

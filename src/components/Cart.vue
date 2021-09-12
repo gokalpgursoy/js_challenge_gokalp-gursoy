@@ -1,23 +1,31 @@
 <template>
-  <div>
+  <div class="cart-wrapper">
     <BaseIcon
       icon-name="bag"
       :show-text="cart.length > 0"
       :text="sumCartPrice"
       :counter="cart.length"
+      clickable
+      @handleClick="handleClickIcon"
     />
+    <ProductPopover v-if="isShowCartPopover" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import { mapState } from 'vuex';
+
 import { ProductModel } from '@/models/ProductModel';
+
+import ProductPopover from '@/components/ProductPopover.vue';
+import { mutations } from '@/store/methods';
 
 export default Vue.extend({
   name: 'Cart',
+  components: { ProductPopover },
   computed: {
-    ...mapState(['cart']),
+    ...mapState(['cart', 'isShowCartPopover']),
     sumCartPrice() {
       const sum: number = this.cart
         .map((item: ProductModel) => {
@@ -35,7 +43,17 @@ export default Vue.extend({
       return `${currencyPrefix}${sum}`;
     },
   },
+  methods: {
+    handleClickIcon() {
+      this.$store.commit(mutations.SET_IS_SHOW_WISHLIST_POPOVER, false);
+      this.$store.commit(mutations.SET_IS_SHOW_CART_POPOVER, !this.isShowCartPopover);
+    },
+  },
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.cart-wrapper {
+  position: relative;
+}
+</style>

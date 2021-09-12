@@ -1,5 +1,10 @@
 <template>
-  <div class="base-icon">
+  <div
+    class="base-icon"
+    :class="clickable && 'base-icon__clickable'"
+    @click="clickable && $emit('handleClick')"
+    :id="`${iconName}-icon`"
+  >
     <span v-if="showText" class="base-icon__text" v-text="text"></span>
     <component :is="iconComponent" class="base-icon__icon" v-bind="$attrs" @v-on="$listeners" />
     <span v-if="counter" class="base-icon__counter">{{ counter }}</span>
@@ -25,6 +30,9 @@ export default Vue.extend({
     counter: {
       type: Number,
     },
+    clickable: {
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -40,6 +48,9 @@ export default Vue.extend({
   justify-content: center;
   align-items: flex-end;
   height: 23px;
+  &__clickable {
+    cursor: pointer;
+  }
   &__text {
     margin-right: 5px;
     font-size: 12px;
