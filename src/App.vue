@@ -20,13 +20,13 @@ import Container from '@/components/Container.vue';
 import Footer from '@/components/Footer.vue';
 
 export default Vue.extend({
+  name: 'App',
   components: {
     Products,
     Header,
     Container,
     Footer,
   },
-  name: 'App',
 });
 </script>
 

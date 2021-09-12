@@ -50,9 +50,9 @@ export default Vue.extend({
     };
   },
   computed: {
-    ...mapState(['totalProductCount', 'currentPage', 'isLoading']),
+    ...mapState(['totalProductCount', 'currentPage', 'isLoading', 'limit']),
     totalPageCount(): number {
-      return Math.floor(this.totalProductCount / 6);
+      return Math.floor(this.totalProductCount / this.limit);
     },
     paginationItems(): PaginationItemModel[] {
       const paginationItems: PaginationItemModel[] = [];
@@ -100,6 +100,7 @@ export default Vue.extend({
       this.updateCurrentPage(nextPageNumber);
     },
     updateCurrentPage(pageNumber: number) {
+      window.scrollTo(0, 0);
       this.$store.dispatch(actions.UPDATE_PAGE_AND_GET_PRODUCTS, pageNumber);
     },
   },
