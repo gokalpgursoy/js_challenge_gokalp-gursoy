@@ -1,8 +1,17 @@
 <template>
   <article class="product">
     <figure class="product__image-wrapper">
-      <img class="product__image" src="../assets/images/activity_image.jpeg" alt="PRODUCT_TITLE" />
+      <img
+        v-if="!isLoading"
+        class="product__image"
+        src="../assets/images/activity_image.jpeg"
+        alt="PRODUCT_TITLE"
+        width="300"
+        height="300"
+      />
+      <div v-else class="skeleton"></div>
       <button
+        v-if="!isLoading"
         class="product__wishlist-button button button--round"
         :class="isProductExistInWishlist && 'product__wishlist-button--exist'"
         @click="handleToggleWishlist"
@@ -10,7 +19,7 @@
         <BaseIcon icon-name="wishlist" />
       </button>
     </figure>
-    <div class="product__details">
+    <div v-if="!isLoading" class="product__details">
       <h2 class="product__details--title">{{ product.title }}</h2>
       <p class="product__details--subtitle">{{ product.description }}</p>
       <div class="product__details--price">
@@ -20,7 +29,10 @@
         <span v-else class="product__details--price">
           {{ product.original_retail_price.formatted_iso_value }}
         </span>
-        <span v-if="product.discount" class="product__details--price--discounted">
+        <span
+          v-if="product.discount"
+          class="product__details--price--discounted"
+        >
           {{ product.retail_price.formatted_iso_value }}
         </span>
       </div>
@@ -56,12 +68,16 @@ export default Vue.extend({
     },
   },
   computed: {
-    ...mapState(['cart', 'wishlist']),
+    ...mapState(['cart', 'wishlist', 'isLoading']),
     isProductExistInCart() {
-      return this.cart.some((item: ProductModel) => item.uuid === this.product.uuid);
+      return this.cart.some(
+        (item: ProductModel) => item.uuid === this.product.uuid,
+      );
     },
     isProductExistInWishlist() {
-      return this.wishlist.some((item: ProductModel) => item.uuid === this.product.uuid);
+      return this.wishlist.some(
+        (item: ProductModel) => item.uuid === this.product.uuid,
+      );
     },
   },
   methods: {
@@ -170,6 +186,24 @@ export default Vue.extend({
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 1.39px;
+  }
+}
+.skeleton {
+  width: 300px;
+  height: 250px;
+  cursor: progress;
+  background: linear-gradient(0.25turn, transparent, #fff, transparent),
+    linear-gradient(#eee, #eee),
+    radial-gradient(38px circle at 19px 19px, #eee 50%, transparent 51%),
+    linear-gradient(#eee, #eee);
+  background-repeat: no-repeat;
+  background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;
+  background-position: -315px 0, 0 0, 0px 190px, 50px 195px;
+  animation: loading 1.5s infinite;
+}
+@keyframes loading {
+  to {
+    background-position: 315px 0, 0 0, 0 190px, 50px 195px;
   }
 }
 </style>

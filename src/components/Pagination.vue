@@ -2,7 +2,11 @@
   <nav class="pagination">
     <ul class="pagination__list" v-if="totalPageCount > 1">
       <li class="pagination__item">
-        <button class="pagination__link" @click="handlePrevPage" :disabled="currentPage === 1">
+        <button
+          class="pagination__link"
+          @click="handlePrevPage"
+          :disabled="currentPage === 1 || isLoading"
+        >
           <BaseIcon icon-name="arrow-left" />
         </button>
       </li>
@@ -12,13 +16,14 @@
           :class="currentPage === item.pageNumber && 'pagination__link--selected'"
           v-text="item.isNextGroup ? '...' : item.pageNumber"
           @click="handleUpdateCurrentPage(item)"
+          :disabled="isLoading"
         ></button>
       </li>
       <li class="pagination__item">
         <button
           class="pagination__link"
           @click="handleNextPage"
-          :disabled="currentPage === totalPageCount"
+          :disabled="currentPage === totalPageCount || isLoading"
         >
           <BaseIcon icon-name="arrow-right" />
         </button>
@@ -45,7 +50,7 @@ export default Vue.extend({
     };
   },
   computed: {
-    ...mapState(['totalProductCount', 'currentPage']),
+    ...mapState(['totalProductCount', 'currentPage', 'isLoading']),
     totalPageCount(): number {
       return Math.floor(this.totalProductCount / 6);
     },

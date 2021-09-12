@@ -6,6 +6,7 @@ const mutations = {
   REMOVE_FROM_CART: 'products/REMOVE_FROM_CART',
   REMOVE_FROM_WISHLIST: 'products/REMOVE_FROM_WISHLIST',
   SET_CURRENT_PAGE: 'products/SET_CURRENT_PAGE',
+  SET_IS_LOADING: 'products/SET_IS_LOADING',
 };
 
 const actions = {

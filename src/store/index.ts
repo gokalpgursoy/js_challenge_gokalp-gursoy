@@ -20,6 +20,7 @@ export default new Vuex.Store({
     totalProductCount: 0,
     currentPage: 1,
     limit: 6,
+    isLoading: false,
   },
   mutations: {
     [mutations.SET_PRODUCTS]: (state, data: ProductModel[]) => {
@@ -49,13 +50,18 @@ export default new Vuex.Store({
     [mutations.SET_CURRENT_PAGE]: (state, page) => {
       state.currentPage = page;
     },
+    [mutations.SET_IS_LOADING]: (state, isLoading: boolean) => {
+      state.isLoading = isLoading;
+    },
   },
   actions: {
     [actions.GET_PRODUCTS]: async ({ state, commit }) => {
+      commit(mutations.SET_IS_LOADING, true);
       const offset = state.currentPage - 1;
       const response = await api.getProducts(state.limit, offset);
       commit(mutations.SET_PRODUCTS, response.data);
       commit(mutations.SET_TOTAL_PRODUCT_COUNT, response.meta.count);
+      commit(mutations.SET_IS_LOADING, false);
     },
     [actions.UPDATE_PAGE_AND_GET_PRODUCTS]: async ({ dispatch, commit }, pageNumber) => {
       commit(mutations.SET_CURRENT_PAGE, pageNumber);
