@@ -4,7 +4,7 @@ You can reach source code of Musement JS Challenge developed by me. Also if you 
 
 ![Products](public/readme/preview.png)
 
-It is a product listing page. Also if you want to buy this product it is possible to Adding that product to the cart or if you want to buy it later you can add that product to your Wishlist.
+It is a responsive product listing page. Also if you want to buy this product it is possible to Adding that product to the cart or if you want to buy it later you can add that product to your Wishlist.
 
 You can reach the products to click the BAG or STAR icon in Navbar which you adding cart or adding wishlist.
 
