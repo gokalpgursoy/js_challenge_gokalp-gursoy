@@ -110,9 +110,10 @@ export default Vue.extend({
       align-items: flex-start;
       justify-content: center;
       &__remove-button {
+        font-size: 10px;
         background-color: $white;
-        color: $primary;
-        border: 2px solid $primary;
+        color: $danger;
+        border: 2px solid $danger;
         height: 20px;
         width: 20px;
         border-radius: 50%;

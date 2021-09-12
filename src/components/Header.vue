@@ -30,6 +30,10 @@ export default Vue.extend({
   display: flex;
   align-items: center;
   text-transform: uppercase;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
   .header-container {
     display: flex;
     flex-direction: row;

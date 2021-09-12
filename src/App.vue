@@ -57,6 +57,6 @@ export default Vue.extend({
   display: flex;
   flex-direction: row;
   flex: 1 0 auto;
-  margin: 30px 0 20px;
+  margin: 60px 0 20px;
 }
 </style>
