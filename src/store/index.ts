@@ -37,11 +37,9 @@ export default new Vuex.Store({
 
       let currencyPrefix = '';
       if (state.cart.length) {
-        [currencyPrefix] = state.cart[0].retail_price.formatted_value.split(
-          ' ',
-        );
+        [currencyPrefix] = state.cart[0].retail_price.formatted_value.split(' ');
       }
-      return `${currencyPrefix}${sum}`;
+      return `${currencyPrefix}${sum.toFixed(2)}`;
     },
   },
   mutations: {
@@ -58,17 +56,13 @@ export default new Vuex.Store({
       state.wishlist.push(data);
     },
     [mutations.REMOVE_FROM_CART]: (state, productId: string) => {
-      const index = state.cart.findIndex(
-        (item: ProductModel) => item.uuid === productId,
-      );
+      const index = state.cart.findIndex((item: ProductModel) => item.uuid === productId);
       if (index > -1) {
         state.cart.splice(index, 1);
       }
     },
     [mutations.REMOVE_FROM_WISHLIST]: (state, productId: string) => {
-      const index = state.wishlist.findIndex(
-        (item: ProductModel) => item.uuid === productId,
-      );
+      const index = state.wishlist.findIndex((item: ProductModel) => item.uuid === productId);
       if (index > -1) {
         state.wishlist.splice(index, 1);
       }
@@ -95,10 +89,7 @@ export default new Vuex.Store({
       commit(mutations.SET_TOTAL_PRODUCT_COUNT, response.meta.count);
       commit(mutations.SET_IS_LOADING, false);
     },
-    [actions.UPDATE_PAGE_AND_GET_PRODUCTS]: async (
-      { dispatch, commit },
-      pageNumber,
-    ) => {
+    [actions.UPDATE_PAGE_AND_GET_PRODUCTS]: async ({ dispatch, commit }, pageNumber) => {
       commit(mutations.SET_CURRENT_PAGE, pageNumber);
       dispatch(actions.GET_PRODUCTS);
     },
