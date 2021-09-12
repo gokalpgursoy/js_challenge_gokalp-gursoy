@@ -1,6 +1,11 @@
 <template>
-  <div class="popover">
-    <div class="popover__card__wrapper">
+  <div class="popover" :class="isShowCartPopover ? 'popover__cart' : 'popover__wishlist'">
+    <div
+      class="popover__card__wrapper"
+      :class="
+        isShowCartPopover ? 'popover__card__wrapper__cart' : 'popover__card__wrapper__wishlist'
+      "
+    >
       <div v-for="(item, i) in list" class="popover__card" :key="i">
         <img
           class="popover__card--image"
@@ -12,10 +17,10 @@
         <div class="popover__card--content">
           <p class="popover__card--content__title">{{ item.title }}</p>
           <p v-if="item.discount" class="popover__card--content__price">
-            {{ item.retail_price.formatted_value }}
+            1 X {{ item.retail_price.formatted_iso_value }}
           </p>
           <p v-else class="popover__card--content__price">
-            {{ item.original_retail_price.formatted_value }}
+            1 X {{ item.original_retail_price.formatted_iso_value }}
           </p>
         </div>
         <div class="popover__card--button-wrapper">
@@ -78,19 +83,29 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .popover {
   width: 300px;
-  height: 400px;
   overflow: hidden;
   background-color: $white;
   color: $primary;
-  border: 1px solid $primary;
-  border-radius: 1px;
+  border: 2px solid $primary;
+  border-radius: 5px;
   position: absolute;
   top: 25px;
   left: -250px;
   z-index: 1;
-  &__card__wrapper {
+  &__cart {
     height: 350px;
+  }
+  &__wishlist {
+    height: 300px;
+  }
+  &__card__wrapper {
     overflow: auto;
+    &__cart {
+      height: 300px;
+    }
+    &__wishlist {
+      height: 350px;
+    }
   }
   &__card {
     height: 100px;
@@ -100,7 +115,7 @@ export default Vue.extend({
     align-items: flex-start;
     justify-content: space-between;
     gap: 10px;
-    border-bottom: 1px solid $primary;
+    border-bottom: 2px solid $primary;
     &--content {
       &__price {
         margin-top: 10px;
@@ -112,8 +127,8 @@ export default Vue.extend({
       justify-content: center;
       &__remove-button {
         background-color: $white;
-        color: $gray;
-        border: 1px solid $gray;
+        color: $primary;
+        border: 2px solid $primary;
         height: 20px;
         width: 20px;
         border-radius: 50%;
@@ -131,7 +146,7 @@ export default Vue.extend({
     height: 50px;
     padding: 8px;
     &--text {
-      color: $gray;
+      color: $primary;
     }
   }
 }
